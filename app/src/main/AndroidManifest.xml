@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.xklakoux.lamp">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name=".app.LampApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="database.db"/>
+        <meta-data
+            android:name="VERSION"
+            android:value="10"/>
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true"/>
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.xklakoux.lamp"/>
+
+        <uses-library android:name="android.test.runner"/>
+
+        <activity
+            android:name=".lamps.LampsActivity"
+            android:label="@string/title_activity_token_list"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".lampdetails.LampDetailsActivity"
+            android:label="@string/title_activity_lamp_details"
+            android:parentActivityName=".lamps.LampsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.xklakoux.lamp.lamps.LampsActivity"/>
+        </activity>
+        <activity
+            android:name=".schedule.ScheduleActivity"
+            android:label="@string/title_activity_lamp_other"
+            android:parentActivityName=".lampdetails.LampDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.xklakoux.lamp.lampdetails.LampDetailsActivity"/>
+        </activity>
+        <activity
+            android:name=".schedules.SchedulesActivity"
+            android:label="@string/title_activity_schedules"
+            android:parentActivityName=".lampdetails.LampDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.xklakoux.lamp.lampdetails.LampDetailsActivity"/>
+        </activity>
+        <activity
+            android:name=".lampothers.LampOthersActivity"
+            android:label="@string/title_activity_lamp_others"
+            android:parentActivityName=".lampdetails.LampDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.xklakoux.lamp.lampdetails.LampDetailsActivity"/>
+        </activity>
+    </application>
+
+</manifest>

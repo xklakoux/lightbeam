@@ -1,0 +1,145 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context=".schedule.ScheduleFragment"
+            tools:showIn="@layout/activity_lamp_schedule">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTodLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_of_day"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+
+            <TextView
+                android:id="@+id/tvTimeOfDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:minWidth="50dp"
+                tools:text="15:34"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monday_short"
+                    android:id="@+id/button"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tuesday_short"
+                    android:id="@+id/button6"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wednesday_short"
+                    android:id="@+id/button7"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/thursday_short"
+                    android:id="@+id/button5"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/friday_short"
+                    android:id="@+id/button4"
+                    android:layout_weight="2"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="aaa"
+                    android:id="@+id/button2"
+                    android:layout_weight="3"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saturday_short"
+                    android:id="@+id/button13"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sunday_short"
+                    android:id="@+id/button14"
+                    android:layout_weight="2"/>
+
+                <Button
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:text="aaa"
+                    android:id="@+id/button3"
+                    android:layout_weight="3"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reccuring"
+                android:id="@+id/textView2"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
