@@ -21,13 +21,13 @@ public interface LampsContract {
 
         void showLampDetailsUi(String lampId);
 
-        void showLampNotTracked(String id);
+        void showLampTurnedOff(String id);
 
-        void showLampTracked(String id);
+        void showLampTurnedOn(String id);
 
         void showLoadingLampsError();
 
-        void showChangeTrackingStateError(String id);
+        void showChangeTurnOnOffStateError(String id);
 
         void showNoLamps();
 
@@ -42,9 +42,9 @@ public interface LampsContract {
 
         void openLampDetails(@NonNull Lamp requestedLamp);
 
-        void trackLamp(@NonNull Lamp activatedLamp);
+        void turnOnLamp(@NonNull Lamp activatedLamp);
 
-        void dontTrackLamp(@NonNull Lamp deactivatedLamp);
+        void turnOffLamp(@NonNull Lamp deactivatedLamp);
 
     }
 }

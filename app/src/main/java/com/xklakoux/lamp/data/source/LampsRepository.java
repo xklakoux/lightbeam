@@ -205,11 +205,11 @@ public class LampsRepository implements LampsDataSource {
 
 
     @Override
-    public void trackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+    public void turnOnLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
         checkNotNull(lamp);
         checkNotNull(callback);
-        mRemoteDataSource.trackLamp(lamp,callback);
-        mLocalDataSource.trackLamp(lamp, callback);
+        mRemoteDataSource.turnOnLamp(lamp,callback);
+        mLocalDataSource.turnOnLamp(lamp, callback);
 
         lamp.setTracking(true);
 
@@ -220,20 +220,20 @@ public class LampsRepository implements LampsDataSource {
     }
 
     @Override
-    public void trackLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
+    public void turnOnLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
         checkNotNull(lampId);
-        trackLamp(checkNotNull(getLampWithId(lampId)),callback);
+        turnOnLamp(checkNotNull(getLampWithId(lampId)),callback);
     }
 
     @Override
-    public void dontTrackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+    public void turnOffLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
         checkNotNull(lamp);
         checkNotNull(callback);
 
         lamp.setTracking(false);
 
-        mLocalDataSource.dontTrackLamp(lamp,callback);
-        mRemoteDataSource.dontTrackLamp(lamp,callback);
+        mLocalDataSource.turnOffLamp(lamp,callback);
+        mRemoteDataSource.turnOffLamp(lamp,callback);
 
 
         if (mCachedLamps == null) {
@@ -243,9 +243,9 @@ public class LampsRepository implements LampsDataSource {
     }
 
     @Override
-    public void dontTrackLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
+    public void turnOffLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
         checkNotNull(lampId);
-        dontTrackLamp(checkNotNull(getLampWithId(lampId)),callback);
+        turnOffLamp(checkNotNull(getLampWithId(lampId)),callback);
     }
 
     @Override

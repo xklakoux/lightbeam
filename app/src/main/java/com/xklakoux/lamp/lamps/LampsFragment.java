@@ -122,15 +122,15 @@ public class LampsFragment extends Fragment implements LampsContract.View {
     }
 
     @Override
-    public void showLampNotTracked(String id) {
+    public void showLampTurnedOff(String id) {
         enableSwitch(id);
-        showMessage(getString(R.string.token_tracking_marked_inactive));
+        showMessage(getString(R.string.lamp_turned_off));
     }
 
     @Override
-    public void showLampTracked(String id) {
+    public void showLampTurnedOn(String id) {
         enableSwitch(id);
-        showMessage(getString(R.string.token_tracking_maked_active));
+        showMessage(getString(R.string.lamp_turned_on));
     }
 
     private void enableSwitch(String id) {
@@ -151,7 +151,7 @@ public class LampsFragment extends Fragment implements LampsContract.View {
     }
 
     @Override
-    public void showChangeTrackingStateError(String id) {
+    public void showChangeTurnOnOffStateError(String id) {
         enableSwitch(id);
         showMessage(getString(R.string.error_while_changing_lamp_state));
     }
@@ -264,13 +264,13 @@ public class LampsFragment extends Fragment implements LampsContract.View {
         @Override
         public void onDeactivateLampClick(Lamp deactivatedLamp) {
 
-            mPresenter.dontTrackLamp(deactivatedLamp);
+            mPresenter.turnOffLamp(deactivatedLamp);
 
         }
 
         @Override
         public void onActivateLampClick(Lamp activatedLamp) {
-            mPresenter.trackLamp(activatedLamp);
+            mPresenter.turnOnLamp(activatedLamp);
         }
     };
 

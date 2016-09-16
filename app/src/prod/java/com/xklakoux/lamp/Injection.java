@@ -5,8 +5,8 @@ import com.xklakoux.lamp.data.source.local.LampsLocalDataSource;
 import com.xklakoux.lamp.data.source.remote.LampsRemoteDataSource;
 import com.xklakoux.lamp.lampdetails.domain.usecase.GetLamp;
 import com.xklakoux.lamp.lampdetails.domain.usecase.UpdateLamp;
-import com.xklakoux.lamp.lamps.domain.usecase.TrackLamp;
-import com.xklakoux.lamp.lamps.domain.usecase.DontTrackLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOnLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOffLamp;
 import com.xklakoux.lamp.lamps.domain.usecase.GetLamps;
 
 /**
@@ -25,8 +25,8 @@ public class Injection {
         return UseCaseHandler.getInstance();
     }
 
-    public static TrackLamp provideActivateLamp() {
-        return new TrackLamp(Injection.provideLampsRepository());
+    public static TurnOnLamp provideActivateLamp() {
+        return new TurnOnLamp(Injection.provideLampsRepository());
     }
 
     public static GetLamp provideGetLamp(){
@@ -38,7 +38,7 @@ public class Injection {
     }
 
 
-    public static DontTrackLamp provideDeactivateLamp() {
-        return new DontTrackLamp(Injection.provideLampsRepository());
+    public static TurnOffLamp provideDeactivateLamp() {
+        return new TurnOffLamp(Injection.provideLampsRepository());
     }
 }

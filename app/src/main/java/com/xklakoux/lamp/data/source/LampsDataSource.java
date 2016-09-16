@@ -45,13 +45,13 @@ public interface LampsDataSource {
 
     void saveLamp(@NonNull Lamp lamp);
 
-    void trackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback);
+    void turnOnLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback);
 
-    void trackLamp(@NonNull String lampId, @NonNull GenericCallback callback);
+    void turnOnLamp(@NonNull String lampId, @NonNull GenericCallback callback);
 
-    void dontTrackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback);
+    void turnOffLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback);
 
-    void dontTrackLamp(@NonNull String lampId, @NonNull GenericCallback callback);
+    void turnOffLamp(@NonNull String lampId, @NonNull GenericCallback callback);
 
     void updateLamp(@NonNull Lamp lamp, @NonNull IdCallback callback);
 

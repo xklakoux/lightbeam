@@ -75,6 +75,8 @@ dependencies {
     compile "com.google.guava:guava:$rootProject.guavaVersion"
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okHttpVersion"
+
     compile "com.github.satyan:sugar:$rootProject.sugarVersion"
     compile "com.pes.materialcolorpicker:library:$rootProject.colorPickerVersion"
     compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"

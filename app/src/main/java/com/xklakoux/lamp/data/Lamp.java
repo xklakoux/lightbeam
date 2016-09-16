@@ -144,9 +144,18 @@ public final class Lamp extends SugarRecord {
 
     public Map<String, String> getLightSettingHashMap() {
         Map<String, String> map = new HashMap<>();
-        map.put("color", mLightSetting.getColor());
-        map.put("intensity", "" + mLightSetting.getIntensity());
-        map.put("mode", "" + mLightSetting.getMode());
+        final String color = mLightSetting.getColor();
+        if(color !=null){
+            map.put("color", color);
+        }
+        final Short intensity = mLightSetting.getIntensity();
+        if(intensity !=null) {
+            map.put("intensity", "" + intensity);
+        }
+        final Short mode = mLightSetting.getMode();
+        if (mode != null) {
+            map.put("mode", "" + mLightSetting.getMode());
+        }
         return map;
     }
 
@@ -183,14 +192,6 @@ public final class Lamp extends SugarRecord {
 
         public void setColor(String color) {
             this.mColor = color;
-        }
-
-        public HashMap<String, String> getMapOfFields() {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("intensity", "" + mIntensity);
-            map.put("mode", "" + mMode);
-            map.put("color", mColor);
-            return map;
         }
 
     }

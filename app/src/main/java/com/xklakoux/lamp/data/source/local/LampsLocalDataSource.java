@@ -30,7 +30,8 @@ public class LampsLocalDataSource implements LampsDataSource {
 
     @Override
     public void deleteAllLamps() {
-        Lamp.deleteAll(Lamp.class);
+            Lamp.deleteAll(Lamp.class);
+
     }
 
     @Override
@@ -67,12 +68,12 @@ public class LampsLocalDataSource implements LampsDataSource {
 
 
     @Override
-    public void trackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
-        trackLamp(lamp.getLampId(),callback);
+    public void turnOnLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+        turnOnLamp(lamp.getLampId(),callback);
     }
 
     @Override
-    public void trackLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
+    public void turnOnLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
         checkNotNull(lampId);
         Lamp lamp = getLamp(lampId);
         if (lamp != null) {
@@ -85,12 +86,12 @@ public class LampsLocalDataSource implements LampsDataSource {
     }
 
     @Override
-    public void dontTrackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
-        dontTrackLamp(lamp.getLampId(),callback);
+    public void turnOffLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+        turnOffLamp(lamp.getLampId(),callback);
     }
 
     @Override
-    public void dontTrackLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
+    public void turnOffLamp(@NonNull String lampId, @NonNull GenericCallback callback) {
         checkNotNull(lampId);
         Lamp lamp = getLamp(lampId);
         if (lamp != null) {

@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.xklakoux.lamp.UseCase;
 import com.xklakoux.lamp.UseCaseHandler;
 import com.xklakoux.lamp.data.Lamp;
-import com.xklakoux.lamp.lamps.domain.usecase.DontTrackLamp;
-import com.xklakoux.lamp.lamps.domain.usecase.TrackLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOffLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOnLamp;
 import com.xklakoux.lamp.lamps.domain.usecase.GetLamps;
 
 import java.util.List;
@@ -20,17 +20,17 @@ public class LampsPresenter implements LampsContract.Presenter {
 
     private final LampsContract.View mLampsView;
     private final GetLamps mGetLamps;
-    private final DontTrackLamp mDontTrackLamp;
-    private final TrackLamp mTrackLamp;
+    private final TurnOffLamp mTurnOffLamp;
+    private final TurnOnLamp mTurnOnLamp;
 
     private boolean mFirstLoad = true;
 
     private final UseCaseHandler mUseCaseHandler;
 
-    public LampsPresenter(@NonNull UseCaseHandler useCaseHandler, @NonNull LampsContract.View lampsView, @NonNull GetLamps getLamps, @NonNull DontTrackLamp dontTrackLamp, @NonNull TrackLamp trackLamp){
+    public LampsPresenter(@NonNull UseCaseHandler useCaseHandler, @NonNull LampsContract.View lampsView, @NonNull GetLamps getLamps, @NonNull TurnOffLamp turnOffLamp, @NonNull TurnOnLamp turnOnLamp){
         mGetLamps = getLamps;
-        mDontTrackLamp = dontTrackLamp;
-        mTrackLamp = trackLamp;
+        mTurnOffLamp = turnOffLamp;
+        mTurnOnLamp = turnOnLamp;
         mUseCaseHandler = checkNotNull(useCaseHandler);
         mLampsView = checkNotNull(lampsView);
         mLampsView.setPresenter(this);
@@ -96,42 +96,42 @@ public class LampsPresenter implements LampsContract.Presenter {
     }
 
     @Override
-    public void trackLamp(@NonNull final Lamp activatedLamp) {
+    public void turnOnLamp(@NonNull final Lamp activatedLamp) {
         checkNotNull(activatedLamp, "activatedLamp cannot be null");
-        TrackLamp.RequestValues requestValues = new TrackLamp.RequestValues(activatedLamp.getLampId());
-        mUseCaseHandler.execute(mTrackLamp, requestValues, new UseCase.UseCaseCallback<TrackLamp.ResponseValue>() {
+        TurnOnLamp.RequestValues requestValues = new TurnOnLamp.RequestValues(activatedLamp.getLampId());
+        mUseCaseHandler.execute(mTurnOnLamp, requestValues, new UseCase.UseCaseCallback<TurnOnLamp.ResponseValue>() {
             @Override
-            public void onSuccess(TrackLamp.ResponseValue response) {
+            public void onSuccess(TurnOnLamp.ResponseValue response) {
                 if(!mLampsView.isActive()){
                     return;
                 }
-                mLampsView.showLampTracked(activatedLamp.getLampId());
+                mLampsView.showLampTurnedOn(activatedLamp.getLampId());
             }
 
             @Override
             public void onError() {
-                mLampsView.showChangeTrackingStateError(activatedLamp.getLampId());
+                mLampsView.showChangeTurnOnOffStateError(activatedLamp.getLampId());
 
             }
         });
     }
 
     @Override
-    public void dontTrackLamp(@NonNull final Lamp deactivatedLamp) {
+    public void turnOffLamp(@NonNull final Lamp deactivatedLamp) {
         checkNotNull(deactivatedLamp, "deactivatedLamp cannot be null");
-        DontTrackLamp.RequestValues requestValues = new DontTrackLamp.RequestValues(deactivatedLamp.getLampId());
-        mUseCaseHandler.execute(mDontTrackLamp, requestValues, new UseCase.UseCaseCallback<DontTrackLamp.ResponseValue>() {
+        TurnOffLamp.RequestValues requestValues = new TurnOffLamp.RequestValues(deactivatedLamp.getLampId());
+        mUseCaseHandler.execute(mTurnOffLamp, requestValues, new UseCase.UseCaseCallback<TurnOffLamp.ResponseValue>() {
             @Override
-            public void onSuccess(DontTrackLamp.ResponseValue response) {
+            public void onSuccess(TurnOffLamp.ResponseValue response) {
                 if(!mLampsView.isActive()){
                     return;
                 }
-                mLampsView.showLampNotTracked(deactivatedLamp.getLampId());
+                mLampsView.showLampTurnedOff(deactivatedLamp.getLampId());
             }
 
             @Override
             public void onError() {
-                mLampsView.showChangeTrackingStateError(deactivatedLamp.getLampId());
+                mLampsView.showChangeTurnOnOffStateError(deactivatedLamp.getLampId());
             }
         });
     }

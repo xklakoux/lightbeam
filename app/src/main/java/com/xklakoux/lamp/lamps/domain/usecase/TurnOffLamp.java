@@ -11,17 +11,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by artur on 04/05/16.
  */
-public class TrackLamp extends UseCase<TrackLamp.RequestValues, TrackLamp.ResponseValue> {
+public class TurnOffLamp extends UseCase<TurnOffLamp.RequestValues, TurnOffLamp.ResponseValue>{
 
     private final LampsRepository mLampsRepository;
 
-    public TrackLamp(@NonNull LampsRepository lampsRepository) {
+    public TurnOffLamp(@NonNull LampsRepository lampsRepository) {
         mLampsRepository = checkNotNull(lampsRepository, "tasksRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        mLampsRepository.trackLamp(requestValues.getLampId(), new LampsDataSource.GenericCallback() {
+        mLampsRepository.turnOffLamp(requestValues.getLampId(), new LampsDataSource.GenericCallback() {
             @Override
             public void onSuccess() {
                 getUseCaseCallback().onSuccess(new ResponseValue());

@@ -7,9 +7,9 @@ import com.xklakoux.lamp.data.Lamp;
 import com.xklakoux.lamp.data.LampBuilder;
 import com.xklakoux.lamp.data.source.LampsDataSource;
 import com.xklakoux.lamp.data.source.LampsRepository;
-import com.xklakoux.lamp.lamps.domain.usecase.DontTrackLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOffLamp;
 import com.xklakoux.lamp.lamps.domain.usecase.GetLamps;
-import com.xklakoux.lamp.lamps.domain.usecase.TrackLamp;
+import com.xklakoux.lamp.lamps.domain.usecase.TurnOnLamp;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -71,8 +71,8 @@ public class LampsPresenterTest {
     private LampsPresenter givenLampsPresenter() {
         UseCaseHandler useCaseHandler = new UseCaseHandler(new TestUseCaseScheduler());
         GetLamps getLamps = new GetLamps(mLampsRepository);
-        TrackLamp trackLamp = new TrackLamp(mLampsRepository);
-        DontTrackLamp dontTrackLamp = new DontTrackLamp(mLampsRepository);
+        TurnOnLamp trackLamp = new TurnOnLamp(mLampsRepository);
+        TurnOffLamp dontTrackLamp = new TurnOffLamp(mLampsRepository);
 
         return new LampsPresenter(useCaseHandler,mLampsView, getLamps, dontTrackLamp, trackLamp);
     }
@@ -148,13 +148,13 @@ public class LampsPresenterTest {
         final Lamp nottrackedlamp = LAMPS.get(0);
         nottrackedlamp.setTracking(true);
         //when lamp switched to not track
-        mLampsPresenter.trackLamp(nottrackedlamp);
+        mLampsPresenter.turnOnLamp(nottrackedlamp);
 
-        verify(mLampsRepository).trackLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
+        verify(mLampsRepository).turnOnLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
         mGenericCallbackArgumentCaptor.getValue().onSuccess();
 
         //show lamp details UI
-        verify(mLampsView).showLampTracked(any(String.class));
+        verify(mLampsView).showLampTurnedOn(any(String.class));
 
     }
 
@@ -166,12 +166,12 @@ public class LampsPresenterTest {
         //when lamp switched to track
 
 
-        mLampsPresenter.dontTrackLamp(trackedLamp);
-        verify(mLampsRepository).dontTrackLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
+        mLampsPresenter.turnOffLamp(trackedLamp);
+        verify(mLampsRepository).turnOffLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
         mGenericCallbackArgumentCaptor.getValue().onSuccess();
         //show lamp details UI
 
-        verify(mLampsView).showLampNotTracked(any(String.class));
+        verify(mLampsView).showLampTurnedOff(any(String.class));
 
     }
 
@@ -181,12 +181,12 @@ public class LampsPresenterTest {
         final Lamp nottrackedlamp = new LampBuilder().setLampId("0").setTracking(false).createLamp();
 
         //when lamp switched to not track
-        mLampsPresenter.trackLamp(nottrackedlamp);
-        verify(mLampsRepository).trackLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
+        mLampsPresenter.turnOnLamp(nottrackedlamp);
+        verify(mLampsRepository).turnOnLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
         mGenericCallbackArgumentCaptor.getValue().onFailure();
 
         //show lamp details UI
-        verify(mLampsView).showChangeTrackingStateError(any(String.class));
+        verify(mLampsView).showChangeTurnOnOffStateError(any(String.class));
 
     }
 
@@ -196,12 +196,12 @@ public class LampsPresenterTest {
         final Lamp trackedLamp = new LampBuilder().setLampId("0").setTracking(true).createLamp();
 
         //when lamp switched to track
-        mLampsPresenter.dontTrackLamp(trackedLamp);
-        verify(mLampsRepository).dontTrackLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
+        mLampsPresenter.turnOffLamp(trackedLamp);
+        verify(mLampsRepository).turnOffLamp(any(String.class),mGenericCallbackArgumentCaptor.capture());
         mGenericCallbackArgumentCaptor.getValue().onFailure();
 
         //show lamp details UI
-        verify(mLampsView).showChangeTrackingStateError(any(String.class));
+        verify(mLampsView).showChangeTurnOnOffStateError(any(String.class));
 
     }
 }

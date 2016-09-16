@@ -50,4 +50,6 @@
     <string name="schedules">Schedules</string>
     <string name="couldnt_change_tracking">Couldn\'t change tracking</string>
     <string name="couldnt_change_active_state">Couldn\'t change active state</string>
+    <string name="lamp_turned_on">Lamp turned on</string>
+    <string name="lamp_turned_off">Lamp turned off</string>
 </resources>

@@ -9,9 +9,12 @@ import com.xklakoux.lamp.data.Lamp;
 import com.xklakoux.lamp.data.source.Id;
 import com.xklakoux.lamp.data.source.LampsDataSource;
 
+import java.util.HashMap;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,7 +28,7 @@ public class LampsRemoteDataSource implements LampsDataSource {
 
     private static LampsDataSource INSTANCE = null;
 
-    private static final String ENDPOINT = "https://demo2426029.mockable.io/v1/mobile/";
+    private static final String ENDPOINT = "http://192.168.2.104:8000/v1/mobile/";
     private final ApiService mService;
 
         private LampsRemoteDataSource(){
@@ -33,7 +36,12 @@ public class LampsRemoteDataSource implements LampsDataSource {
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .create();
 
-            Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(ENDPOINT).build();
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+
+            Retrofit retrofit = new Retrofit.Builder().client(client).addConverterFactory(GsonConverterFactory.create()).baseUrl(ENDPOINT).build();
 
             mService = retrofit.create(ApiService.class);
 
@@ -108,14 +116,14 @@ public class LampsRemoteDataSource implements LampsDataSource {
     }
 
     @Override
-    public void trackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
-        trackLamp(lamp.getLampId(), callback);
+    public void turnOnLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+        turnOnLamp(lamp.getLampId(), callback);
 
     }
 
     @Override
-    public void trackLamp(@NonNull String lampId, @NonNull final GenericCallback callback) {
-        Call<Id> call = mService.updateLamp(lampId,null,null,null,true,null,null);
+    public void turnOnLamp(@NonNull String lampId, @NonNull final GenericCallback callback) {
+        Call<Id> call = mService.updateLamp(lampId,null,new HashMap<String,String>(),true,null,null,null);
         call.enqueue(new Callback<Id>() {
             @Override
             public void onResponse(Call<Id> call, Response<Id> response) {
@@ -134,14 +142,14 @@ public class LampsRemoteDataSource implements LampsDataSource {
     }
 
     @Override
-    public void dontTrackLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
-        dontTrackLamp(lamp.getLampId(), callback);
+    public void turnOffLamp(@NonNull Lamp lamp, @NonNull GenericCallback callback) {
+        turnOffLamp(lamp.getLampId(), callback);
 
     }
 
     @Override
-    public void dontTrackLamp(@NonNull String lampId, @NonNull final GenericCallback callback) {
-        Call<Id> call = mService.updateLamp(lampId,null,null,null,false,null,null);
+    public void turnOffLamp(@NonNull String lampId, @NonNull final GenericCallback callback) {
+        Call<Id> call = mService.updateLamp(lampId,null,new HashMap<String,String>(),true,null,null,null);
         call.enqueue(new Callback<Id>() {
             @Override
             public void onResponse(Call<Id> call, Response<Id> response) {
