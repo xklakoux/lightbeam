@@ -28,7 +28,7 @@ public class LampsRemoteDataSource implements LampsDataSource {
 
     private static LampsDataSource INSTANCE = null;
 
-    private static final String ENDPOINT = "http://192.168.2.104:8000/v1/mobile/";
+    private static final String ENDPOINT = "https://demo2426029.mockable.io/v1/mobile/";
     private final ApiService mService;
 
         private LampsRemoteDataSource(){
